@@ -1,0 +1,4 @@
+.env
+dist
+dump_*
+node_modules
