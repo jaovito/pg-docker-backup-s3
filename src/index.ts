@@ -56,7 +56,7 @@ async function uploadFileToS3(fileName: string, folderName: string, useLocalTime
 
   const uploadParams = {
     Bucket: bucketName,
-    Key: `${folderName}/${fileName}${useLocalTime ? '-' + atualDate : ''}`,
+    Key: `${folderName}/${useLocalTime ? '-' + atualDate : ''}${fileName}`,
     Body: fileContent,
   };
 
