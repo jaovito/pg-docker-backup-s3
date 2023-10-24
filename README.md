@@ -45,14 +45,14 @@ To use this project, follow the steps below:
     <br />
   
    ```bash
-   npm start --name test --database some_database --container postgres
+   npm start -- --name test --database some_database --container postgres
    ```
    It will create a folder called `test`, a file `dump_test-{atual_iso_date}` and other folder inside with the CSV
 
 7. Run the code:
 
    ```bash
-   npm start --name some_name --database some_database_name --container docker_postgres_container_name
+   npm start -- --name some_name --database some_database_name --container docker_postgres_container_name
    ```
 
    Replace `some_name` with the name of the folder where you want to store the backup and CSV files.
