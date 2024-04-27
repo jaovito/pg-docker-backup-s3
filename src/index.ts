@@ -18,7 +18,7 @@ if (!databaseName) {
 }
 
 // Shell commant to generate the dump file
-const shellCommand = `docker exec -t pg pg_dumpall -c -U postgres > dump_${folderName}.sql`;
+const shellCommand = `docker exec -t ${containerName} pg_dumpall -c -U postgres > dump_${folderName}.sql`;
 
 // Shell command to export the users table to csv file
 const exportCsvCommand = `docker exec ${containerName} psql -U postgres -d ${databaseName} -c "COPY (SELECT * FROM users) TO '/tmp/users.csv' WITH (FORMAT CSV, HEADER);" && docker cp ${containerName}:/tmp/users.csv .`;
