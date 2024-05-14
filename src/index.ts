@@ -8,6 +8,7 @@ const folderName = args.name;
 const databaseName = args.database;
 const containerName = args.container || 'postgres';
 const usersTable = args.usersTable || 'users';
+const postgresUser = args.dbUser || 'postgres';
 const atualDate = new Date().toISOString();
 
 if (!folderName) {
@@ -19,10 +20,10 @@ if (!databaseName) {
 }
 
 // Shell commant to generate the dump file
-const shellCommand = `docker exec -t ${containerName} pg_dumpall -c -U postgres > dump_${folderName}.sql`;
+const shellCommand = `docker exec -t ${containerName} pg_dumpall -c -U ${postgresUser} > dump_${folderName}.sql`;
 
 // Shell command to export the users table to csv file
-const exportCsvCommand = `docker exec ${containerName} psql -U postgres -d ${databaseName} -c "COPY (SELECT * FROM ${usersTable}) TO '/tmp/users.csv' WITH (FORMAT CSV, HEADER);" && docker cp ${containerName}:/tmp/users.csv .`;
+const exportCsvCommand = `docker exec ${containerName} psql -U ${postgresUser} -d ${databaseName} -c "COPY (SELECT * FROM ${usersTable}) TO '/tmp/users.csv' WITH (FORMAT CSV, HEADER);" && docker cp ${containerName}:/tmp/users.csv .`;
 
 // Bucket name to storage the file
 const bucketName = String(process.env.AWS_S3_BUCKET);
